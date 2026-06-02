@@ -1,0 +1,56 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bilayers-algorithms"
+version = "0.1.0"
+description = "algorithms supported by bilayers"
+authors = [
+    {name = "Rajavi Shah", email = "shahraja@broadinstitute.org"},
+    {name = "Nodar Gogoberidze", email = "gnodar01@gmail.com"},
+    {name = "Beth Cimini", email = "bcimini@broadinstitute.org"}
+]
+maintainers = [
+    {name = "Rajavi Shah", email = "shahraja@broadinstitute.org"},
+    {name = "Nodar Gogoberidze", email = "gnodar01@gmail.com"},
+    {name = "Beth Cimini", email = "bcimini@broadinstitute.org"}
+]
+readme = "README.md"
+license = "BSD-3-Clause"
+requires-python = ">=3.9"
+dependencies = []
+
+[project.optional-dependencies]
+lint = ["ruff"]
+dev = [
+    "bilayers-algorithms[lint]",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["bilayers_algorithms*"]
+
+[tool.setuptools.package-data]
+"bilayers_algorithms" = [
+    "**/config.yaml",
+    "**/Dockerfile",
+    "**/*.Dockerfile",
+    "**/*.py",
+]
+
+[tool.pixi.workspace]
+channels = ["conda-forge"]
+platforms = ["win-64", "linux-64", "osx-64", "osx-arm64"]
+
+[tool.pixi.dependencies]
+python = ">=3.9"
+
+[tool.pixi.pypi-dependencies]
+bilayers-algorithms = { path = ".", editable = true }
+
+[tool.pixi.environments]
+dev = ["dev", "lint"]
+
+[tool.ruff]
+line-length = 160
