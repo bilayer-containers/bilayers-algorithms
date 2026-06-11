@@ -22,8 +22,14 @@ requires-python = ">=3.9"
 dependencies = []
 
 [project.optional-dependencies]
+test = [
+    "pytest",
+    # As discussed here: https://github.com/bilayer-containers/bilayers/issues/107#issuecomment-3422718581
+    "bilayers-schema @ git+https://github.com/bilayer-containers/bilayers-schema.git@dev",
+]
 lint = ["ruff"]
 dev = [
+    "bilayers-algorithms[test]",
     "bilayers-algorithms[lint]",
 ]
 
