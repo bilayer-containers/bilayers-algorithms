@@ -10,7 +10,7 @@ docker_image:
   tag: ""
   platform: "" # eg. linux/amd64, linux/arm64, linux/arm/v7 etc.
 
-algorithm_folder_name:
+algorithm_folder_name: example_algorithm
 
 exec_function:
   name: "generate_cli_command"
