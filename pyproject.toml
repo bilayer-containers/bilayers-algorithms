@@ -19,13 +19,13 @@ maintainers = [
 readme = "README.md"
 license = "BSD-3-Clause"
 requires-python = ">=3.9"
-dependencies = []
+dependencies = [
+    "bilayers-schema @ git+https://github.com/bilayer-containers/bilayers-schema.git@dev",
+]
 
 [project.optional-dependencies]
 test = [
     "pytest",
-    # As discussed here: https://github.com/bilayer-containers/bilayers/issues/107#issuecomment-3422718581
-    "bilayers-schema @ git+https://github.com/bilayer-containers/bilayers-schema.git@dev",
 ]
 lint = ["ruff"]
 dev = [
@@ -55,8 +55,14 @@ python = ">=3.9"
 [tool.pixi.pypi-dependencies]
 bilayers-algorithms = { path = ".", editable = true }
 
+[tool.pixi.feature.dev.pypi-dependencies]
+pre-commit = "*"
+
+[tool.pixi.feature.dev.activation]
+scripts = ["scripts/install-pre-commit.sh"]
+
 [tool.pixi.environments]
-dev = ["dev", "lint"]
+dev = ["dev", "lint", "test"]
 
 [tool.ruff]
 line-length = 160
