@@ -105,7 +105,7 @@ def parse_arguments() -> ParsedArgs:
 
     parser.add_argument("--save_dir", required=True, help="Path to the folder to save output images.")
 
-    return parser.parse_args()  # type: ignore
+    return vars(parser.parse_args())  # type: ignore
 
 
 def get_image_files_from_folder(folder_path: str) -> list[str]:
