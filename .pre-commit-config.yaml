@@ -6,3 +6,10 @@ repos:
         entry: pixi run -e dev ruff check
         language: system
         types: [python]
+      - id: pixi-lock-check
+        name: pixi.lock up-to-date with pyproject.toml
+        entry: pixi lock --check
+        language: system
+        # Only run when the dependency inputs or the lock itself change.
+        files: ^(pyproject\.toml|pixi\.lock)$
+        pass_filenames: false
