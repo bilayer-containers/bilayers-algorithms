@@ -19,6 +19,9 @@ jobs:
       - name: Set up pixi
         uses: prefix-dev/setup-pixi@v0.10.0
         with:
+          # Pin the pixi version so CI validates the lock with the same
+          # resolver that generated it. Bump this in lockstep with pixi.lock.
+          pixi-version: v0.69.0
           environments: dev
           locked: true
           cache: true
