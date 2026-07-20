@@ -13,9 +13,9 @@ citations:
     description: "Segments images using stardist"
 
 docker_image:
-  org: bilayer
+  org: rajavishah
   name: stardist
-  tag: "7.0.0"
+  tag: "8.0.0"
   platform: "linux/arm64/v8"
 
 algorithm_folder_name: "stardist_inference"

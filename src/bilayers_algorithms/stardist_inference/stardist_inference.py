@@ -5,13 +5,14 @@ from skimage.transform import resize
 import imageio
 from stardist.models import StarDist2D, StarDist3D
 from csbdeep.utils import normalize
+import numpy as np
 
 
 def stardist_inference(model_type, model_name, model_path, input_folder, output_folder, prob_thresh, nms_thresh, n_tiles_x, n_tiles_y, save_probs, use_gpu):
     """Run StarDist model for object detection and save results."""
 
     # Check if the output folder exists
-    os.makedirs(os.path.dirname(output_folder), exist_ok=True)
+    os.makedirs(output_folder, exist_ok=True)
 
     # Get list of all image files in the input folder
     image_extensions = (".tif", ".tiff", ".png", ".jpg", ".jpeg", ".bmp")
@@ -91,31 +92,34 @@ def stardist_inference(model_type, model_name, model_path, input_folder, output_
 
             # Save segmentation result
             output_image_path = os.path.join(output_folder, os.path.splitext(image_file)[0] + "_segmented.tif")
-            output_prob_path = os.path.join(output_folder, os.path.splitext(image_file)[0] + "_probabilities.npy")
 
             # Save segmentation result
             print(f"Saving result to {output_image_path}")
             imageio.imwrite(output_image_path, data[0])
 
+            # File 1: resized probability image --> .tif
             size_corrected = resize(probs[0], img.shape)
-            print(f"Type of size_corrected: {type(size_corrected)}")
+            output_prob_tif_path = os.path.join(output_folder, os.path.splitext(image_file)[0] + "_probabilities.tif")
+            print(f"Saving probability image to {output_prob_tif_path}")
+            imageio.imwrite(output_prob_tif_path, size_corrected) 
 
-            print(f"Saving probabilities to {output_prob_path}")
-            imageio.imwrite(output_prob_path, size_corrected)
-
+            # File 2: raw probability array --> .npy
+            output_prob_npy_path = os.path.join(output_folder, os.path.splitext(image_file)[0] + "_probabilities.npy")
+            print(f"Saving probability array to {output_prob_npy_path}")
+            np.save(output_prob_npy_path, probs[0])
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Minimal StarDist CLI for segmentation.")
     parser.add_argument("--model_type", choices=["2D", "3D"], required=True, help="Choose StarDist model type.")
     parser.add_argument("--model_name", type=str, default=None, help="Pre-trained model name (if using a default model).")
     parser.add_argument("--model_path", type=str, default=None, help="Path to custom-trained model directory.")
-    parser.add_argument("--input_folder", type=str, required=True, help="Path to input image.")
-    parser.add_argument("--output_folder", type=str, default="output.tif", help="Output file name.")
+    parser.add_argument("--input_folder", type=str, required=True, help="Path to folder containing input images.")
+    parser.add_argument("--output_folder", type=str, default="/bilayers/output_images", help="Path to output folder where results will be saved.")
     parser.add_argument("--prob_thresh", type=float, default=0.5, help="Probability threshold for detection.")
     parser.add_argument("--nms_thresh", type=float, default=0.4, help="Non-Maximum Suppression (NMS) threshold.")
     parser.add_argument("--n_tiles_x", type=int, default=1, help="Specify the number of tiles to break the image down into along the x-axis (horizontal).")
     parser.add_argument("--n_tiles_y", type=int, default=1, help="Specify the number of tiles to break the image down into along the y-axis (vertical).")
-    parser.add_argument("--save_probabilities", action="store_false", help="Save probability map as a separate image.")
+    parser.add_argument("--save_probabilities", action="store_true", help="Save probability map as a separate image.")
     parser.add_argument("--gpu", action="store_true", help="Use GPU for inference if available.")
 
     args = parser.parse_args()
