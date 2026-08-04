@@ -5,9 +5,9 @@ citations:
     description: "Baysor performs cell segmentation on imaging-based spatial transcriptomics data by optimizing the likelihood of transcriptional composition, cell size, and cell shape. It can segment from molecule positions alone or refine an existing prior segmentation."
 
 docker_image:
-  org: quay.io/biocontainers
+  org: bilayers #quay.io/biocontainers
   name: baysor
-  tag: "0.7.1--h467016e_2"
+  tag: "0.7.1"
   platform: "linux/amd64"
 
 algorithm_folder_name: "baysor_segmentation"
