@@ -1,0 +1,265 @@
+citations:
+  - name: "Baysor"
+    doi: 10.1038/s41587-021-01044-w
+    license: "MIT"
+    description: "Baysor performs cell segmentation on imaging-based spatial transcriptomics data by optimizing the likelihood of transcriptional composition, cell size, and cell shape. It can segment from molecule positions alone or refine an existing prior segmentation."
+
+docker_image:
+  org: quay.io/biocontainers
+  name: baysor
+  tag: "0.7.1--h467016e_2"
+  platform: "linux/amd64"
+
+algorithm_folder_name: "baysor_segmentation"
+
+exec_function:
+  name: "generate_cli_command"
+  cli_command: "baysor run"
+  hidden_args:
+
+inputs:
+  - name: coordinates
+    type: file
+    label: "Molecules file"
+    description: "Molecule table of detected molecules with x, y (and optional z) positions and a gene type column. CSV or Parquet."
+    cli_tag: ""
+    cli_order: 1
+    default: ""
+    optional: False
+    format:
+      - csv
+      - parquet
+    folder_name: ""
+    file_count: single
+    unique_string:
+      - "*"
+    section_id: "inputs"
+    mode: "beginner"
+
+  - name: prior_segmentation
+    type: array
+    label: "Prior segmentation"
+    description: "(Optional) Image or array file with segmentation mask. If your prior is a column in the molecules table instead, leave this empty and use the 'Prior segmentation column' box in the parameters section. If you provide neither, you must set the Scale parameter."
+    cli_tag: ""
+    cli_order: 2
+    default: ""
+    optional: True
+    format:
+      - tif
+      - tiff
+      - mat
+      - csv
+      - parquet
+    folder_name: ""
+    file_count: single
+    unique_string:
+      - "*"
+    section_id: "inputs"
+    mode: "advanced"
+
+  - name: config_file
+    type: file
+    label: "Config file (TOML)"
+    description: "TOML config setting data column names and segmentation parameters. Command-line flags override values set here."
+    cli_tag: "-c"
+    cli_order: 3
+    default: ""
+    optional: True
+    format:
+      - toml
+    folder_name: ""
+    file_count: single
+    unique_string:
+      - "*"
+    section_id: "inputs"
+    mode: "beginner"
+
+outputs:
+  - name: segmentation_csv
+    type: measurement
+    label: "Segmentation (per-molecule)"
+    description: "Per-molecule result: assigned cell id, confidence, cluster, and noise flag."
+    cli_tag: "None"
+    cli_order: 0
+    default: "directory"
+    optional: False
+    format:
+      - csv
+    folder_name: ""
+    file_count: single
+    unique_string:
+      - "segmentation.csv"      # The cell_stats output has the same [segmentation] stem and csv output. The only way to distinguish this is to use the full filename - no cleaner way.
+    section_id: "outputs"
+    mode: "beginner"
+
+  - name: cell_stats
+    type: measurement
+    label: "Cell statistics"
+    description: "Per-cell diagnostics: area, transcript count, density, elongation, average confidence."
+    cli_tag: "None"
+    cli_order: 0
+    default: "directory"
+    optional: False
+    format:
+      - csv
+    folder_name: ""
+    file_count: single
+    unique_string:
+      - "_cell_stats"
+    section_id: "outputs"
+    mode: "beginner"
+
+  - name: count_matrix
+    type: measurement
+    label: "Cell-by-gene count matrix"
+    description: "Segmented cell count matrix (loom or tsv, per count-matrix-format)."
+    cli_tag: "None"
+    cli_order: 0
+    default: "directory"
+    optional: False
+    format:
+      - loom
+      - tsv
+    folder_name: ""
+    file_count: single
+    unique_string:
+      - "_counts"
+    section_id: "outputs"
+    mode: "beginner"
+
+  - name: polygons
+    type: measurement
+    label: "Cell boundary polygons"
+    description: "Estimated cell boundaries in GeoJSON, for visualization."
+    cli_tag: "None"
+    cli_order: 0
+    default: "directory"
+    optional: True
+    format:
+      - json
+    folder_name: ""
+    file_count: multiple
+    unique_string:
+      - "_polygons"
+    section_id: "outputs"
+    mode: "beginner"
+
+parameters:
+  - name: output_dir
+    type: textbox
+    label: "Output Directory"
+    description: "Directory where Baysor writes the segmentation, count matrix, cell stats, and polygons."
+    default: "baysor_output"
+    cli_tag: "-o"
+    optional: False
+    section_id: "outputs"
+    mode: "beginner"
+    output_dir_set: True
+
+  - name: prior_segmentation_column
+    type: textbox
+    label: "Prior segmentation column"
+    description: "(Optional) Use a column of the molecules table as the prior segmentation instead of an image file. Must be written with a leading colon, exactly as it appears in the table, for example :cell_id. Leave empty if you uploaded a prior segmentation file above, or if you are setting the Scale parameter instead."
+    default: ""
+    cli_tag: ""
+    cli_order: 2
+    optional: True
+    section_id: "input-args"
+    mode: "beginner"
+
+  - name: scale
+    type: float
+    label: "Scale (cell radius)"
+    description: "(Required when no prior segmentation is given, either as a file or as a column) Approximate cell radius in the same units as x and y. Leave negative to estimate it from the prior segmentation; Baysor will stop with an error if neither a prior nor a positive scale is given."
+    default: -1.0
+    cli_tag: "--scale"
+    optional: True
+    section_id: "input-args"
+    mode: "beginner"
+
+  - name: min_molecules_per_cell
+    type: integer
+    label: "Minimum molecules per cell"
+    description: "Minimal number of molecules for a cell to be considered as real. Depends heavily on the protocol: a few for ISS, tens for Xenium, hundreds for MERFISH. Also used to estimate Scale when Scale is left negative."
+    default: 50
+    cli_tag: "-m"
+    optional: True
+    section_id: "input-args"
+    mode: "beginner"
+
+  - name: scale_std
+    type: textbox
+    label: "Scale standard deviation"
+    description: "Spread of cell size across cells. A number, or a percent string like 25%."
+    default: "25%"
+    cli_tag: "--scale-std"
+    optional: True
+    section_id: "advanced-args"
+    mode: "advanced"
+
+  - name: n_clusters
+    type: integer
+    label: "Number of clusters"
+    description: "Number of molecule clusters (roughly major cell types). Usually 3 to 15."
+    default: 4
+    cli_tag: "--n-clusters"
+    optional: True
+    section_id: "advanced-args"
+    mode: "advanced"
+
+  - name: prior_segmentation_confidence
+    type: float
+    label: "Prior segmentation confidence"
+    description: "How much to trust the prior, from 0 (ignore) to 1 (never contradict). Only matters when a prior is given."
+    default: 0.2
+    cli_tag: "--prior-segmentation-confidence"
+    optional: True
+    section_id: "advanced-args"
+    mode: "advanced"
+
+  - name: count_matrix_format
+    type: dropdown
+    label: "Count matrix format"
+    description: "Storage format for the cell count matrix."
+    default: "loom"
+    multiselect: False
+    options:
+      - label: "loom"
+        value: "loom"
+      - label: "tsv"
+        value: "tsv"
+    cli_tag: "--count-matrix-format"
+    optional: True
+    section_id: "advanced-args"
+    mode: "advanced"
+
+  - name: polygon_format
+    type: dropdown
+    label: "Polygon format"
+    description: "GeoJSON style for boundary output, or none to skip saving polygons."
+    default: "FeatureCollection"
+    multiselect: False
+    options:
+      - label: "FeatureCollection"
+        value: "FeatureCollection"
+      - label: "GeometryCollection"
+        value: "GeometryCollection"
+      - label: "none"
+        value: "none"
+    cli_tag: "--polygon-format"
+    optional: True
+    section_id: "advanced-args"
+    mode: "advanced"
+
+  - name: plot
+    type: checkbox
+    label: "Save QC plots"
+    description: "Also write HTML diagnostic and cell-border visualizations."
+    default: False
+    append_value: True
+    cli_tag: "-p"
+    optional: True
+    section_id: "advanced-args"
+    mode: "advanced"
+
+display_only:
