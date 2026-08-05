@@ -62,7 +62,7 @@ pre-commit = "*"
 scripts = ["scripts/install-pre-commit.sh"]
 
 [tool.pixi.environments]
-dev = ["dev", "lint", "test"]
+dev = ["dev"]
 
 [tool.ruff]
 line-length = 160
