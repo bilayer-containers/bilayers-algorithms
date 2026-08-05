@@ -14,7 +14,15 @@ RUN wget -q -O /tmp/python.tar.gz "$PYTHON_URL" \
 # the tarball unpacks to /opt/python -> bin/ holds python, python3, pip, pip3
 ENV PATH=/opt/python/bin:$PATH
 
-# smoke test
+# The base image's ENTRYPOINT (/usr/local/env-execute) wipes PATH, so we need to symlink 
+# the python and pip binaries.
+RUN ln -s /opt/python/bin/python3 /usr/local/bin/python \
+    && ln -s /opt/python/bin/python3 /usr/local/bin/python3 \
+    && ln -s /opt/python/bin/pip3 /usr/local/bin/pip \
+    && ln -s /opt/python/bin/pip3 /usr/local/bin/pip3
+
+# smoke test: second command runs through the entrypoint, as the container will
 RUN python --version && python -m pip --version && baysor --version
+RUN /usr/local/env-execute sh -c 'python --version && python -m pip --version'
 
 CMD ["/bin/bash"]
