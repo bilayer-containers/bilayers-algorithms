@@ -256,7 +256,7 @@ parameters:
     label: "Save QC plots"
     description: "Also write HTML diagnostic and cell-border visualizations."
     default: False
-    append_value: True
+    append_value: False
     cli_tag: "-p"
     optional: True
     section_id: "advanced-args"
