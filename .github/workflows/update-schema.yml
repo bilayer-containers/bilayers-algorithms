@@ -28,10 +28,14 @@ jobs:
 
       - name: Open PR if lockfile changed
         if: steps.check.outputs.changed == 'true'
-        uses: peter-evans/create-pull-request@v6
+        uses: peter-evans/create-pull-request@c5a7806660adbe173f04e3e038b0ccdcd758773c  # v6.1.0
         with:
           token: ${{ secrets.REPO_TRIGGER_TOKEN }}
           commit-message: "[chore] update pixi.lock for schema change"
           branch: update/update-schema-lockfile
           title: "Auto-update pixi.lock (schema change)"
-          body: "Triggered by a change in bilayers-schema. Regenerated via pixi lock."
+          body: |
+             Triggered by bilayers-schema PR #${{ github.event.client_payload.pr_number }}
+             (commit ${{ github.event.client_payload.schema_commit_sha }}).
+             This is an automated update to the pixi.lock file.
+             Regenerated pixi.lock to pick up that change.
