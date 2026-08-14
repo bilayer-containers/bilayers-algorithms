@@ -20,7 +20,7 @@ readme = "README.md"
 license = "BSD-3-Clause"
 requires-python = ">=3.9"
 dependencies = [
-    "bilayers-schema @ git+https://github.com/bilayer-containers/bilayers-schema.git@dev",
+    "bilayers-schema @ git+https://github.com/bilayer-containers/bilayers-schema.git",
 ]
 
 [project.optional-dependencies]
