@@ -50,7 +50,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/python_abi-3.14-8_cp314.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/tzdata-2025c-hc9c84f9_1.conda
       - pypi: ./
-      - pypi: git+https://github.com/bilayer-containers/bilayers-schema.git?rev=dev#f31ead062e536f613146f13bfb4bea0734c2ea16
+      - pypi: git+https://github.com/bilayer-containers/bilayers-schema.git#b1b494da55dda0d20ba34d071df7e7e55a1f7631
       - pypi: https://files.pythonhosted.org/packages/88/f9/16491d7ed2a919954993e48aa941b200f38040928474c9e85ea9e64222c3/pyyaml-6.0.3-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl
       osx-64:
       - conda: https://conda.anaconda.org/conda-forge/noarch/ca-certificates-2026.6.17-hbd8a1cb_0.conda
@@ -71,7 +71,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/osx-64/tk-8.6.13-h7142dee_3.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/zstd-1.5.7-h3eecb57_6.conda
       - pypi: ./
-      - pypi: git+https://github.com/bilayer-containers/bilayers-schema.git?rev=dev#f31ead062e536f613146f13bfb4bea0734c2ea16
+      - pypi: git+https://github.com/bilayer-containers/bilayers-schema.git#b1b494da55dda0d20ba34d071df7e7e55a1f7631
       - pypi: https://files.pythonhosted.org/packages/9d/8c/f4bd7f6465179953d3ac9bc44ac1a8a3e6122cf8ada906b4f96c60172d43/pyyaml-6.0.3-cp314-cp314-macosx_10_13_x86_64.whl
       osx-arm64:
       - conda: https://conda.anaconda.org/conda-forge/noarch/ca-certificates-2026.6.17-hbd8a1cb_0.conda
@@ -91,7 +91,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/tk-8.6.13-h010d191_3.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/zstd-1.5.7-hbf9d68e_6.conda
       - pypi: ./
-      - pypi: git+https://github.com/bilayer-containers/bilayers-schema.git?rev=dev#f31ead062e536f613146f13bfb4bea0734c2ea16
+      - pypi: git+https://github.com/bilayer-containers/bilayers-schema.git#b1b494da55dda0d20ba34d071df7e7e55a1f7631
       - pypi: https://files.pythonhosted.org/packages/bd/9c/4d95bb87eb2063d20db7b60faa3840c1b18025517ae857371c4dd55a6b3a/pyyaml-6.0.3-cp314-cp314-macosx_11_0_arm64.whl
       win-64:
       - conda: https://conda.anaconda.org/conda-forge/noarch/ca-certificates-2026.6.17-h4c7d964_0.conda
@@ -113,7 +113,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/win-64/vcomp14-14.51.36231-h1b9f54f_39.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/zstd-1.5.7-h534d264_6.conda
       - pypi: ./
-      - pypi: git+https://github.com/bilayer-containers/bilayers-schema.git?rev=dev#f31ead062e536f613146f13bfb4bea0734c2ea16
+      - pypi: git+https://github.com/bilayer-containers/bilayers-schema.git#b1b494da55dda0d20ba34d071df7e7e55a1f7631
       - pypi: https://files.pythonhosted.org/packages/23/20/bb6982b26a40bb43951265ba29d4c246ef0ff59c9fdcdf0ed04e0687de4d/pyyaml-6.0.3-cp314-cp314-win_amd64.whl
   dev:
     channels:
@@ -144,7 +144,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/python_abi-3.14-8_cp314.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/tzdata-2025c-hc9c84f9_1.conda
       - pypi: ./
-      - pypi: git+https://github.com/bilayer-containers/bilayers-schema.git?rev=dev#f31ead062e536f613146f13bfb4bea0734c2ea16
+      - pypi: git+https://github.com/bilayer-containers/bilayers-schema.git#b1b494da55dda0d20ba34d071df7e7e55a1f7631
       - pypi: https://files.pythonhosted.org/packages/02/08/9c41fb51ab5b43eb21674aff13df270e8ba6c4b29c8624e328dc7a9482af/distlib-0.4.3-py2.py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/24/25/1de2678b631f5a49215c6c96fff41ba892b0a34df68d6d80292b1b48aa7f/pytest-9.1.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/54/20/4d324d65cc6d9205fabedc306948156824eb9f0ee1633355a8f7ec5c66bf/pluggy-1.6.0-py3-none-any.whl
@@ -180,7 +180,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/osx-64/tk-8.6.13-h7142dee_3.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/zstd-1.5.7-h3eecb57_6.conda
       - pypi: ./
-      - pypi: git+https://github.com/bilayer-containers/bilayers-schema.git?rev=dev#f31ead062e536f613146f13bfb4bea0734c2ea16
+      - pypi: git+https://github.com/bilayer-containers/bilayers-schema.git#b1b494da55dda0d20ba34d071df7e7e55a1f7631
       - pypi: https://files.pythonhosted.org/packages/02/08/9c41fb51ab5b43eb21674aff13df270e8ba6c4b29c8624e328dc7a9482af/distlib-0.4.3-py2.py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/24/25/1de2678b631f5a49215c6c96fff41ba892b0a34df68d6d80292b1b48aa7f/pytest-9.1.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/54/20/4d324d65cc6d9205fabedc306948156824eb9f0ee1633355a8f7ec5c66bf/pluggy-1.6.0-py3-none-any.whl
@@ -215,7 +215,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/tk-8.6.13-h010d191_3.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/zstd-1.5.7-hbf9d68e_6.conda
       - pypi: ./
-      - pypi: git+https://github.com/bilayer-containers/bilayers-schema.git?rev=dev#f31ead062e536f613146f13bfb4bea0734c2ea16
+      - pypi: git+https://github.com/bilayer-containers/bilayers-schema.git#b1b494da55dda0d20ba34d071df7e7e55a1f7631
       - pypi: https://files.pythonhosted.org/packages/02/08/9c41fb51ab5b43eb21674aff13df270e8ba6c4b29c8624e328dc7a9482af/distlib-0.4.3-py2.py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/24/25/1de2678b631f5a49215c6c96fff41ba892b0a34df68d6d80292b1b48aa7f/pytest-9.1.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/47/47/d3ac899991202095dfcf3d5176be4272642be3cf981a2f1a30f72a2afb95/ruff-0.15.20-py3-none-macosx_11_0_arm64.whl
@@ -252,7 +252,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/win-64/vcomp14-14.51.36231-h1b9f54f_39.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/zstd-1.5.7-h534d264_6.conda
       - pypi: ./
-      - pypi: git+https://github.com/bilayer-containers/bilayers-schema.git?rev=dev#f31ead062e536f613146f13bfb4bea0734c2ea16
+      - pypi: git+https://github.com/bilayer-containers/bilayers-schema.git#b1b494da55dda0d20ba34d071df7e7e55a1f7631
       - pypi: https://files.pythonhosted.org/packages/02/08/9c41fb51ab5b43eb21674aff13df270e8ba6c4b29c8624e328dc7a9482af/distlib-0.4.3-py2.py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/23/20/bb6982b26a40bb43951265ba29d4c246ef0ff59c9fdcdf0ed04e0687de4d/pyyaml-6.0.3-cp314-cp314-win_amd64.whl
       - pypi: https://files.pythonhosted.org/packages/24/25/1de2678b631f5a49215c6c96fff41ba892b0a34df68d6d80292b1b48aa7f/pytest-9.1.1-py3-none-any.whl
@@ -1221,13 +1221,13 @@ packages:
 - pypi: ./
   name: bilayers-algorithms
   requires_dist:
-  - bilayers-schema @ git+https://github.com/bilayer-containers/bilayers-schema.git@dev
+  - bilayers-schema @ git+https://github.com/bilayer-containers/bilayers-schema.git
   - pytest ; extra == 'test'
   - ruff ; extra == 'lint'
   - bilayers-algorithms[test] ; extra == 'dev'
   - bilayers-algorithms[lint] ; extra == 'dev'
   requires_python: '>=3.9'
-- pypi: git+https://github.com/bilayer-containers/bilayers-schema.git?rev=dev#f31ead062e536f613146f13bfb4bea0734c2ea16
+- pypi: git+https://github.com/bilayer-containers/bilayers-schema.git#b1b494da55dda0d20ba34d071df7e7e55a1f7631
   name: bilayers-schema
   version: 0.1.0
   requires_dist:
