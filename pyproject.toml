@@ -43,6 +43,8 @@ include = ["bilayers_algorithms*"]
     "**/Dockerfile",
     "**/*.Dockerfile",
     "**/*.py",
+    "**/pixi.toml",
+    "**/pixi.lock",
 ]
 
 [tool.pixi.workspace]
