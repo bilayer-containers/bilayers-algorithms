@@ -8,9 +8,7 @@ from numpy.typing import NDArray
 
 class ParsedArgs(TypedDict):
     folder: str
-    threshold_method: str
-    min_size: float
-    max_size: float
+    sigma_size: float
     save_dir: str
 
 
