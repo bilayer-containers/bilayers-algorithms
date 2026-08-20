@@ -1,3 +1,5 @@
+schema_version: "bilayers-0.1.0"
+
 citations:
   - name: "Stardist_2018"
     doi: "10.1007/978-3-030-00934-2_30"
