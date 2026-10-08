@@ -71,7 +71,6 @@ parameters:
 - append_value: false
   cli_order: 3
   cli_tag: "None"
-  default: ""
   description: Your DeepCell token for downloading model weights.
   interactive: false
   label: DeepCell Access Token
