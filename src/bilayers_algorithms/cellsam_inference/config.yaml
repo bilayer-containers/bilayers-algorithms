@@ -1,19 +1,24 @@
 algorithm_folder_name: cellsam_inference
+
 citations:
 - description: CellSAM, a foundation model for whole-cell segmentation across imaging modalities, built on SAM with a CellFinder detector.
   doi: 10.1101/2023.11.17.567630
   license: Apache-2.0
   name: A Foundation Model for Cell Segmentation
+
 display_only: []
+
 docker_image:
   name: cellsam
   org: bilayer
   tag: "1.0.0"
   platform: linux/amd64
+
 exec_function:
   cli_command: python cellsam_inference.py
   hidden_args: []
   name: generate_cli_command
+
 inputs:
 - cli_order: 1
   cli_tag: --input_folder
@@ -43,6 +48,7 @@ inputs:
   type: image
   unique_string:
   - '*'
+
 outputs:
 - cli_order: 2
   cli_tag: --output_folder
@@ -67,6 +73,7 @@ outputs:
   type: image
   unique_string:
   - mask
+
 parameters:
 - append_value: false
   cli_order: 3
@@ -191,3 +198,5 @@ parameters:
   output_dir_set: true
   section_id: input-args
   type: textbox
+
+display_only:
